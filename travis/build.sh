@@ -23,3 +23,15 @@ buildctl build --frontend dockerfile.v0 \
       --output type=image,name=docker.io/$DOCKER_USERNAME/sonos-doorbell:test-build,push=true \
       --opt platform=$platforms \
       --opt filename=./Dockerfile.cross
+
+# Push image for every arch with arch prefix in tag
+for arch in $architectures
+do
+# Build for all architectures and push manifest
+  buildctl build --frontend dockerfile.v0 \
+      --local dockerfile=. \
+      --local context=. \
+      --output type=image,name=docker.io/$DOCKER_USERNAME/sonos-doorbell:test-build-$arch,push=true \
+      --opt platform=linux/$arch \
+      --opt filename=./Dockerfile.cross
+done
