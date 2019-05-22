@@ -4,7 +4,7 @@ dist: xenial
 
 language: python
 
-python::
+python:
   - 3.7
 
 services:

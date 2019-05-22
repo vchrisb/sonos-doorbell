@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Login into docker
-docker login --username $DOCKER_USER --password $DOCKER_PASSWORD
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 architectures="arm arm64 amd64"
 images=""
@@ -20,11 +20,9 @@ platforms=${platforms::-1}
 buildctl build --frontend dockerfile.v0 \
       --local dockerfile=. \
       --local context=. \
-      --exporter image \
-      --exporter-opt name=docker.io/$DOCKER_USER/sonos-doorbell:test-build \
-      --exporter-opt push=true \
-      --frontend-opt platform=$platforms \
-      --frontend-opt filename=./Dockerfile.cross
+      --exporter type=image,name=docker.io/$DOCKER_USER/sonos-doorbell:test-build,push=true \
+      --opt platform=$platforms \
+      --opt filename=./Dockerfile.cross
 
 # Push image for every arch with arch prefix in tag
 for arch in $architectures
