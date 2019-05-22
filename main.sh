@@ -1,10 +1,9 @@
 #!/bin/bash
 
-pip install --upgrade pip
-pip install SoCo
-pip install mutagen
-pip install netifaces
+python3 -m venv .venv
+source .venv/bin/activate
 
-cd doorbell
+pip install --upgrade pip
+pip install -r requirements.txt
 
 python3 sonos-doorbell.py "Kitchen" --port 8888

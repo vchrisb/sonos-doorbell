@@ -6,9 +6,21 @@ service that can be paired with out IoT devices or smart doorbells to play an au
 
 The sonos-doorbell project launches a simple HTTP server that both receives the incoming doorbell requests and hosts the MP3 files to be used by the doorbell ring. 
 
-### Launch
-1. Install python3 or run from inside a Docker envrionment with python3 setup
-1. Edit main.sh to specify the Zone name and port you want the server to be hosted on
+### Launch local
+1. Install python3
+1. Edit `main.sh` to specify the Zone name and port you want the server to be hosted on
+1. Run `main.sh`
+
+### Launch in Docker
+
+##### Build Image
+
+`docker build . -t sonos-doorbell`
+
+##### Run Image
+
+Only works on Linux, due to requirment of docker host networking  
+`docker run -d -e PORT=8888 -e ROOM=Kitchen --name sonos-doorbell --network host --restart always sonos-doorbell`
 
 ### Test
 http://{hostname:port}/doorbell_press?ringtone=dingdong1&volume=45 
