@@ -3,7 +3,7 @@
 # Login into docker
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-architectures="arm arm64 amd64"
+architectures="arm/v7 arm64/v8 amd64"
 images=""
 platforms=""
 
