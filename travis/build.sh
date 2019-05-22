@@ -20,7 +20,7 @@ platforms=${platforms::-1}
 buildctl build --frontend dockerfile.v0 \
       --local dockerfile=. \
       --local context=. \
-      --exporter type=image,name=docker.io/$DOCKER_USER/sonos-doorbell:test-build,push=true \
+      --output type=image,name=docker.io/$DOCKER_USER/sonos-doorbell:test-build,push=true \
       --opt platform=$platforms \
       --opt filename=./Dockerfile.cross
 
